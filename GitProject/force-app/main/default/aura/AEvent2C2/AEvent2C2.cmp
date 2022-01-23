@@ -1,0 +1,19 @@
+<aura:component controller="AccountDML"> 
+    <aura:attribute name="flag" type="boolean" default="false" />
+    <aura:attribute name="accountData" type="Account" default="{'sobjectType':'Account'}"/>
+    <aura:handler  name="" event="c:AEvent2" action="{!c.showData}"/>
+    
+    <aura:if isTrue="{!v.flag}"> 
+    	<div style="margin-left:100px;margin-top:20px;width:500px;border:1px solid black;">
+            <lightning:card title="Customer Details" iconName="standard:account">
+                <div style="padding:20px;">
+                    <b>Name</b>		:	{!v.accountData.Name} <br/>  
+                    <b>Phone</b>	:	{!v.accountData.Phone} <br/>
+                    <b>Industry</b>	:	{!v.accountData.Industry}
+                </div>
+            </lightning:card>
+        </div>
+    </aura:if>
+    
+
+</aura:component>

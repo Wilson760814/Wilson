@@ -1,0 +1,16 @@
+<apex:page >
+<apex:form >
+<apex:pageBlock title="User Status">
+<apex:pageBlockSection title="User Name">
+<apex:pageBlockSectionItem >{!$User.LastName} {!$User.FirstName} ({!$User.Email})</apex:pageBlockSectionItem>
+</apex:pageBlockSection>
+<apex:pageBlockSection title="Information">
+<apex:pageBlockSectionItem > Today's Date is {! today() }</apex:pageBlockSectionItem>
+<p><apex:pageBlockSectionItem > Today's Date is {! today()+7 }</apex:pageBlockSectionItem></p>
+<p><apex:pageBlockSectionItem > The year today is {!YEAR(TODAY())}</apex:pageBlockSectionItem></p>
+<p><apex:pageBlockSectionItem > Tomorrow will be {!Day(TODAY())+1}</apex:pageBlockSectionItem></p>
+
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form> 
+</apex:page>

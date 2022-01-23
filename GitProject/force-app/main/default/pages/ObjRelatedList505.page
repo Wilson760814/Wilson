@@ -1,0 +1,8 @@
+<apex:page standardController="Position__c">
+<apex:repeat value="{!Position__c}" var="parents">
+        <apex:repeat value="{!parents.Job_Postings__r}" var="childs">
+            {!childs.Name}
+          <br/>
+        </apex:repeat>
+    </apex:repeat>
+</apex:page>

@@ -1,0 +1,7 @@
+<apex:page standardController="Account">
+ <p>{!Account.name} </p >
+  <p>{!Account.AccountNumber} </p >
+   <p>{!Account.Owner.id} </p >
+    <p>{!Account.Type} </p >
+ 
+</apex:page>

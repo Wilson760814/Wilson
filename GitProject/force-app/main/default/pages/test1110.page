@@ -1,0 +1,9 @@
+<apex:page controller="MyController111" tabStyle="Account">
+    <apex:form >
+        <apex:pageBlock title="Hello {!$User.FirstName}!">
+     
+            <apex:inputText value="{!aaa}" id="input"/>
+            <apex:commandButton action="{!Calculation}" value="calculate aaa" reRender="input"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

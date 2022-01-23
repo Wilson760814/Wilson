@@ -1,0 +1,19 @@
+<apex:page standardController="Contact" recordSetVar="cons">
+<apex:form >
+
+    <apex:selectList value="{!filterid}"  size="1">
+    <apex:selectOptions value="{!listviewoptions}"></apex:selectOptions>
+    </apex:selectList>
+
+
+<apex:pageBlock title="Contacts">
+<apex:pageBlockSection />
+      <apex:pageblockTable value="{!cons}" var="c" columns="4">
+          <apex:column value="{!c.FirstName}"/>
+          <apex:column value="{!c.LastName}"/>
+          <apex:column value="{!c.Email}"/>
+          <apex:column value="{!c.accountid}"/>
+      </apex:pageblockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

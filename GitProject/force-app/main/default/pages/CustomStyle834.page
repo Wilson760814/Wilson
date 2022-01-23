@@ -1,0 +1,14 @@
+<apex:page showHeader="false">
+    <style type="text/css">
+        p { font-weight: bold; }
+        h1 { color: #fa0; }
+        newLink { color: #f06; font-weight: bold; }
+    </style>
+    <h1>Testing Custom Stylesheets</h1>
+    <p>This text could go on forever...<br/><br/>
+       But it won't!</p>
+
+    <apex:outputLink value="http://www.salesforce.com" styleClass="newLink">
+        Click here to switch to www.salesforce.com
+    </apex:outputLink>
+</apex:page>

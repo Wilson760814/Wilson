@@ -1,0 +1,20 @@
+<aura:component>
+  <!--使用CSS中.THIS .WHITE类-->  
+  <div class="white"> 
+    Hello, world!   
+  </div>
+  
+  <!--顶级元素使用.THIS类-->
+  <h2>Check out the style in this list.</h2>
+  
+  <div>
+    <!--使用.THIS .RED类-->
+    <li class="red">I'm red.</li>
+    <!--使用.THIS .BLUE类-->
+    <li class="blue">I'm blue.</li>
+    <!--使用.THIS .GREEN类-->
+    <li class="green">I'm green.</li>
+    <!--没有指定，使用当前模块样式-->
+    <li>I'm default.</li>
+  </div>
+</aura:component>

@@ -1,0 +1,27 @@
+/*.THIS.box1 {
+    float:left;
+    border:2px solid black;
+    width:500px;
+    margin-left:100px;
+    margin-top:50px;
+    height:550px;
+}
+
+
+.THIS.box2 {
+     float:left;
+    border:2px solid black;
+    width:500px;
+    margin-left:200px;
+    margin-top:50px;
+    height:550px;
+}*/
+
+.THIS.box1 {
+    
+    border:2px solid black;
+    width:500px;
+    margin-left:100px;
+    margin-top:50px;
+    height:550px;
+}

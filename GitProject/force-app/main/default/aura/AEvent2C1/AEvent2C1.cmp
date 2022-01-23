@@ -1,0 +1,21 @@
+<aura:component controller="AccountDML"> 
+    <aura:registerEvent name="first" type="c:AEvent2"/> 
+    <aura:attribute name="accountrec" type="Account" default="{'sobjectType':'Account'}"/>
+    
+    <div style="margin-left:100px;margin-top:100px;width:500px;border:1px solid green;">
+    	<lightning:card title="" iconName="standard:account">
+        	<aura:set attribute="title">
+            	<h1>New Customer</h1>
+            </aura:set>
+            <aura:set attribute="actions">
+                <lightning:button label="Save" onclick="{!c.doSave}"/>
+                <lightning:button label="Cancel" onclick="{!c.doCancel}"/>
+            </aura:set>
+            <div style="padding:20px;">
+                <lightning:input label="Name" value="{!v.accountrec.Name}"/>
+                <lightning:input label="Phone" value="{!v.accountrec.Phone}"/>
+                <lightning:input label="Industry" value="{!v.accountrec.Industry}"/> 
+            </div>
+        </lightning:card>
+    </div>
+</aura:component>

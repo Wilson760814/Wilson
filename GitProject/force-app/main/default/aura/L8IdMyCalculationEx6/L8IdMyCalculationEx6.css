@@ -1,0 +1,17 @@
+.THIS.box1 {
+    margin:100px;
+    height:450px;
+    width:600px;
+    border:2px solid black;
+    border-radius:20px;
+    padding:10px;
+}
+.THIS .innerDiv{
+    padding:5px;
+}
+.THIS .myBtn{
+    width: 50px;
+}
+.THIS .myClr{
+    width: 120px;
+}

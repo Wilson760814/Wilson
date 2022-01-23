@@ -1,0 +1,30 @@
+<aura:component controller="CustomerRegistrationCls">
+    <aura:attribute name="acc" type="Account" default="{'sobjectType':'Account'}"/>
+    <aura:attribute name="flag" type="boolean" default="false" />
+    
+    <div style="margin-left:100px;margin-top:100px;border:1px solid black;width:500px;">
+    	<lightning:card title="New Customer" iconName ="standard:account">
+            <aura:set attribute="actions"> 
+                <lightning:button label="Save" onclick="{!c.doSave}"/>
+            	<lightning:button label="Cancel" onclick="{!c.doCancel}"/>
+            </aura:set>
+            <div style="padding:20px;"> 
+            	<lightning:input label="Name" value="{!v.acc.Name}"/>
+                <lightning:input label="Phone" value="{!v.acc.Phone}"/>
+                <lightning:input label="Industry" value="{!v.acc.Industry}"/>
+            </div>
+        </lightning:card> 
+    </div>
+    <br/>
+    <aura:if isTrue="{!v.flag}">
+    	<div style="margin-left:100px;margin-top:100px;border:1px solid black;width:500px;">
+            <lightning:card title="Customer Details" iconName ="standard:account">
+               	<div style="padding:20px;">
+                    <b>Name</b> 		:		{!v.acc.Name} <br/>
+                    <b>Phone</b>		:		{!v.acc.Phone} <br/>
+                    <b>Industry</b>		:		{!v.acc.Industry}
+                </div>
+            </lightning:card>
+        </div>
+    </aura:if>
+</aura:component>

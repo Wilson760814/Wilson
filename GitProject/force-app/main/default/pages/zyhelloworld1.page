@@ -1,0 +1,15 @@
+<apex:page >
+<apex:form >
+<p>Hello World</p>
+<font size="1" color="blue"> <b> Your text here </b> </font>
+<p style="color:red">This is a paragraph.</p>
+<apex:pageBlock title="A Block Title">
+<apex:pageBlockSection title="A section Title">
+<apex:pageBlockSectionItem >I'm three components deep!</apex:pageBlockSectionItem>
+</apex:pageBlockSection>
+<apex:pageBlockSection title="A New Section">
+<apex:pageBlockSectionItem >This is another section</apex:pageBlockSectionItem>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form> 
+</apex:page>

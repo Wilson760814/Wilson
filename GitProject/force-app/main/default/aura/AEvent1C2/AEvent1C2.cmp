@@ -1,0 +1,8 @@
+<aura:component >
+    <aura:handler name="" event="c:AEvent1" action="{!c.btn2Action}"/>
+    <aura:attribute name="flag" type="boolean" default="false" />
+    
+    <aura:if isTrue="{!v.flag}">
+    	<lightning:button label="Button2" />
+    </aura:if>
+</aura:component>

@@ -1,0 +1,16 @@
+.THIS.box1 {
+    border:2px solid black;
+    width:500px;
+    margin-left:300px;
+    margin-top:50px;
+    height:550px;
+}
+.THIS .box2{
+    font-size:20px;
+    height:250px;
+    width:400px;
+    border:1px solid black;
+    margin:50px;
+    padding:10px;
+    border-radius:20px;
+}

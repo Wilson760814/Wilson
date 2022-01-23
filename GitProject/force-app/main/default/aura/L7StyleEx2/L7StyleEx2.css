@@ -1,0 +1,21 @@
+.THIS.box1 {
+    height:500px;
+    width:500px;
+    background-color:red;
+    margin-left:100px;
+    padding:50px;
+}
+.THIS .box2 {
+    height:300px; 
+    width:300px;
+    background-color:green;
+    margin-left:50px;
+    padding:50px;
+}
+.THIS .box3 {
+    height:50px;
+    width:50px;
+    background-color:blue;
+    margin-left:20px;
+    padding:50px;
+}

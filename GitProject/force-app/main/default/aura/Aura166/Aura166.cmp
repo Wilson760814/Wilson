@@ -1,0 +1,7 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride,force:hasSObjectName" access="global" >
+    <aura:attribute name="AccId" type="string" />
+    <aura:handler name="init" value="{!this}" action="{!c.invoke}"/>
+    <div style="height:40px;">
+    	<p style="margin-left:10px;color:black;font-size:20px;">AccountID: {!v.AccId}</p>
+    </div>
+</aura:component>

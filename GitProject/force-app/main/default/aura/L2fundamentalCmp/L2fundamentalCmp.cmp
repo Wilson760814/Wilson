@@ -1,0 +1,78 @@
+<aura:component >
+	<!-- Write your component body here -->
+    <!-- HTML Code + text content -->
+    <br/><br/>
+    <div style="margin-left:200px;border:1px solid black;width:500px;">
+    	<table style="padding:10px;">
+        	<tr> 
+                	<td colspan="2" >
+                        <center><b><br/>Customer Personal Information</b></center>
+                    </td>
+            </tr>
+            <tr style="height:10px;"></tr>
+            <tr>
+            	<td>
+                    	First Name
+                </td>
+                <td>
+                    	<p style="margin-left:50px;">Nara</p>
+                </td>
+            </tr>
+            <tr style="height:10px;"></tr>
+            <tr>
+            	<td>
+                    	Last Name
+                </td>
+                <td>
+                    	<p style="margin-left:50px;">Vutla</p>
+                </td>
+            </tr>
+            <tr style="height:10px;"></tr>
+            <tr>
+            	<td>
+                    	Company
+                </td>
+                <td>
+                    	<p style="margin-left:50px;">Test Company</p>
+                </td>
+            </tr>
+            <tr style="height:10px;"></tr>
+            <tr>
+            	<td>
+                    	Phone
+                </td>
+                <td>
+                    	<p style="margin-left:50px;">+919705898616</p>
+                </td>
+            </tr>
+            <tr style="height:10px;"></tr>
+            <tr>
+            	<td>
+                    	Country
+                </td>
+                <td>
+                    	<p style="margin-left:50px;">India</p>
+                </td>
+            </tr>
+            <tr style="height:10px;"></tr>
+            <tr>
+            	<td>
+                    	City
+                </td>
+                <td>
+                    	<p style="margin-left:50px;">Kandukur</p>
+                </td>
+            </tr>
+            <tr style="height:10px;"></tr>
+            <tr>
+            	<td>
+                    	Address
+                </td>
+                <td>
+                    <p style="margin-left:50px;">Kandukur, Prakasam District, India, 523105</p> <br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+</aura:component>

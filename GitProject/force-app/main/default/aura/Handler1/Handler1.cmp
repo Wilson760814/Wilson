@@ -1,0 +1,4 @@
+<aura:component >
+	 <!-- Web Devleopment -->
+    <aura:handler name="init" value="{!this}" action="{!c.ShowOnLoadMessage}"/> 
+</aura:component>

@@ -1,0 +1,5 @@
+<aura:component controller="LabelController">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="mylabel" type="String"/>
+    {!v.mylabel}
+</aura:component>
