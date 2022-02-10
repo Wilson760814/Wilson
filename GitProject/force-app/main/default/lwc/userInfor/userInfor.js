@@ -1,3 +1,5 @@
+
+
 import { LightningElement, wire, track } from 'lwc';
 import { getRecord } from 'lightning/uiRecordApi';
 import USER_ID from '@salesforce/user/Id'; //this is how you will retreive the USER ID of current in user.
@@ -36,7 +38,7 @@ export default class userDetails extends LightningElement {
             console.log(this.profile);
             console.log(this.name);
             console.log(this.username);
-            console.log(this.usertpe);
+            console.log(this.usertype);
             console.log('1');
 
 

@@ -1,9 +1,11 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, track } from 'lwc';
 
 export default class MeetingRooms extends LightningElement {
+    @track flag
+
 
     meetingRoomsInfo = [
-        {roomName:'A-01', roomCapacity:'12'},
+        {roomName:'A-01', roomCapacity:'9'},
         {roomName:'A-02', roomCapacity:'16'},
         {roomName:'A-03', roomCapacity:'12'},
         {roomName:'B-01', roomCapacity:'5'},

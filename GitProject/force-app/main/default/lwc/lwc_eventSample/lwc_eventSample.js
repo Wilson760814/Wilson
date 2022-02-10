@@ -12,4 +12,4 @@ import      {      LightningElement,      track      }      from      'lwc';
                                                      this.page      =      this.page      +      1;		
                              }		
 		
-     }
+     }		
