@@ -9,6 +9,7 @@ export default class GetNavItemsDemo extends LightningElement {
     navItemsHandler({data}){
         if(data){
             console.log("12345");
+            console.log(data);
             console.log(JSON.stringify(data));
             console.log(data.navItems);
             console.log(data.navItems[0]);

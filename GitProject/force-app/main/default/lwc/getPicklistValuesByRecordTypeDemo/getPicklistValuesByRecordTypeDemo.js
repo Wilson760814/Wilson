@@ -13,7 +13,9 @@ export default class GetPicklistValuesByRecordTypeDemo extends LightningElement 
         recordTypeId:'$objectInfo.data.defaultRecordTypeId'})
         picklistHandler({data, error}){
             if(data){
+                console.log(123456)
                 console.log(data)
+                console.log(123456)
                 this.ratingOptions = this.picklistGenerator(data.picklistFieldValues.Rating)
                 this.industryOptions = this.picklistGenerator(data.picklistFieldValues.Industry)
             }
@@ -28,7 +30,9 @@ export default class GetPicklistValuesByRecordTypeDemo extends LightningElement 
 
     handleChange(event){
         const {name, value} = event.target
+        console.log(1234567)
         console.log(name +'==>' +value)
+        console.log(1234567)
         if(name === 'industry'){
             this.selectedIndustry = value
         }

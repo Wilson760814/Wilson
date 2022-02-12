@@ -41,7 +41,11 @@ export default class CreateContactLDS2 extends LightningElement {
 
     get retContactName(){
         if(this.contactRecord.data){
-            console.log(typeof(contactRecord));
+            console.log("aaa");
+            console.log(this.contactRecord);
+            console.log(JSON.stringify(this.contactRecord));
+           
+            console.log("aaa");
             return this.contactRecord.data.fields.LastName.value;
         }
         return undefined;

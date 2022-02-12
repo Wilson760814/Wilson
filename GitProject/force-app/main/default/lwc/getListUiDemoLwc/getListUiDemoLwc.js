@@ -4,9 +4,9 @@ import CONTACT_OBJECT from '@salesforce/schema/Contact'
 import TITLE_FIELD from '@salesforce/schema/Contact.Title'
 export default class GetListUiDemoLwc extends LightningElement {
     contacts=[]
-    pageToken = null
-    nextPageToken = null
-    previousPageToken = null
+    pageToken 
+    nextPageToken 
+    previousPageToken 
     @wire(getListUi, {
         objectApiName:CONTACT_OBJECT,
         listViewApiName:'AllContacts',
@@ -14,9 +14,11 @@ export default class GetListUiDemoLwc extends LightningElement {
         sortBy:TITLE_FIELD,
         pageToken:'$pageToken'
     })
-    listViewHandler({data, error}){
+    list000ViewHandler({data, error}){
         if(data){
+            console.log("BBB")
             console.log(data)
+            console.log(TITLE_FIELD)
             this.contacts = data.records.records
             this.nextPageToken = data.records.nextPageToken
             this.previousPageToken = data.records.previousPageToken

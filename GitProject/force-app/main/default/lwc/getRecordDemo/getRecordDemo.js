@@ -14,6 +14,7 @@ export default class GetRecordDemo extends LightningElement {
      layoutTypes:['Full'], modes:['View']})
      accountHandler({data}){
          if(data){
+            console.log("AAA")
              console.log(data)
              this.name = data.fields.Name.displayValue ? data.fields.Name.displayValue:
              data.fields.Name.value

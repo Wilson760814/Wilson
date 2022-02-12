@@ -5,4 +5,5 @@ export default class GetObjectInfoDemo extends LightningElement {
 
     @wire(getObjectInfo, {objectApiName:ACCOUNT_OBJECT})
     objectInfo
+    
 }

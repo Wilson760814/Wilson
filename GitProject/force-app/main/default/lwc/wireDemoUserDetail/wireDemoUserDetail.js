@@ -12,6 +12,9 @@ export default class WireDemoUserDetail extends LightningElement {
     userDetailHandler({data, error}){
         if(data){
             this.userDetail = data.fields
+            console.log("aaa")
+            console.log(JSON.stringify(data))
+            console.log("aaa")
         }
         if(error){
             console.error(error)
@@ -19,5 +22,9 @@ export default class WireDemoUserDetail extends LightningElement {
     }
 
     @wire(getRecord, {recordId:'$userId', fields})
-    userDetailProperty
+    userDetailProperty;
+   
+    // console.log("bbb")
+    // console.log(this.userDetailProperty);
+    // console.log("bbb")
 }
