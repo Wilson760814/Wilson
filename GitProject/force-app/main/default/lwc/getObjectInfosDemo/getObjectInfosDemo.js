@@ -5,16 +5,16 @@ import OPPORTUNITY_OBJECT from '@salesforce/schema/Opportunity'
 export default class GetObjectInfosDemo extends LightningElement {
 
     @wire(getObjectInfo, {objectApiName:ACCOUNT_OBJECT})
-    objectInfo
+    objectInfo;
 
-    objectApiNames = [ACCOUNT_OBJECT, OPPORTUNITY_OBJECT]
+    objectApiNames = [ACCOUNT_OBJECT, OPPORTUNITY_OBJECT];
 
-    objectInfos
+    objectInfos;
     @wire(getObjectInfos, { objectApiNames: '$objectApiNames' })
     objectInfosHandler({data}){
         if(data){
-            console.log(data)
-            this.objectInfos = data
+            console.log(data);
+            this.objectInfos = data;
         }
     }
 }
