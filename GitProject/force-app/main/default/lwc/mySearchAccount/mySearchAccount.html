@@ -1,0 +1,97 @@
+<template>
+    <lightning-card >
+    <lightning-accordion class="example-accordion"
+                         active-section-name="AccountSearch">
+     
+         <lightning-accordion-section name="Search" label="Search">
+            <div class="slds-box slds-p-around_none slds-m-top_x-small slds-m-bottom_medium slds-m-horizontal_none">
+                <lightning-layout>
+                    <lightning-layout-item flexibility="auto" padding="around-small">
+                        <div class="custom-box slds-box slds-p-around_medium slds-text-align_left">
+                            <form class="createForm">
+                                <lightning-input label="First Name" name="FirstName"
+                                 onchange={changeHandler} class="slds-m-bottom_x-small"></lightning-input>
+                            </form>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" padding="around-small">
+                        <div class="custom-box slds-box slds-p-around_medium slds-text-align_left">
+                            <lightning-combobox
+                                name="Account Source"
+                                label="Account Source"
+                                value={selectedAccountSource}
+                           
+                                options={AccountSourceOptions}
+                                onchange={handleChange} >
+                            </lightning-combobox>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" padding="around-small">
+                        <div class="custom-box slds-box slds-p-around_medium slds-text-align_left">
+                            <lightning-combobox
+                                name="Industry"
+                                label="Industry"
+                                value={selectedIndustry}
+                              
+                                options={industryOptions}
+                                onchange={handleChange} >
+                            </lightning-combobox>
+                        </div>
+                    </lightning-layout-item>
+                    
+                </lightning-layout>
+                <p><lightning-button label="Search" variant="brand" onclick={SearchAccount}></lightning-button></p>    
+            </div>  
+           
+        </lightning-accordion-section> 
+
+        <lightning-accordion-section name="Result" label="Result">
+        
+                <div class="slds-var-p-around_medium">
+                    <table aria-multiselectable="true" class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols" role="grid">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th>Account Name</th>
+                                <th>Account Industry</th>
+                                <th>Account Source</th>
+                                <th>Owner Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={contacts} for:item="contact">
+                                <tr key={contact.fields.Id.Value}>
+                                    <td>{contact.fields.Name.value}</td>
+                                    
+                                    <td>{contact.fields.Email.value}</td>
+                                    <td>{contact.fields.Title.value}</td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="slds-grid">
+                    <lightning-layout>
+                        <lightning-layout-item>
+                                <select class="slds-select slds-text-color_success" name = "optionSelect" onchange={changeHandler} >
+                                        <option value="">Choose Size</option>
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                </select> 
+                        </lightning-layout-item>       
+                        <lightning-layout-item>
+                                <lightning-button label="Previous" icon-name="utility:chevronleft" icon-position="right" onclick={PreviousPageHandler1}></lightning-button>
+                        </lightning-layout-item>
+                        <lightning-layout-item>
+                            <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right" onclick={nextHandler1}></lightning-button>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>  
+            
+            
+        </lightning-accordion-section> 
+
+        </lightning-accordion>
+    </lightning-card >    
+ </template>
