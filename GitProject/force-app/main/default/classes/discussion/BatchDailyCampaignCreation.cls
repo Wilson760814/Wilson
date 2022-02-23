@@ -55,7 +55,7 @@ public class BatchDailyCampaignCreation implements Database.batchable<sObject> {
             CamNew.purecloud__PureCloud_Campaign_Schedule__c = CamRaw.purecloud__PureCloud_Campaign_Schedule__c;
             CamNew.purecloud__PureCloud_Campaign_Setting__c = purecloud__PureCloud_Campaign_Setting__c;
             
-            CamNew.Name = CamRaw.Name + '-'+ DateCreate;// Date modify
+            CamNew.Name = CamRaw.Name + '-'+ DateCreate+'-'+'MSSAT';// Date modify
             CamNew.StartDate = DateCreate ;//Date modify
             CamNew.EndDate = DateCreate ;//Date modify
             CamNew.LaunchDate__c = DateCreate;//Date modify
