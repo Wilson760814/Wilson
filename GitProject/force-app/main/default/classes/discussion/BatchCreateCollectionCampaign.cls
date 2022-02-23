@@ -8,7 +8,7 @@ public class BatchCreateCollectionCampaign implements Database.batchable<sObject
     public Database.QueryLocator start(Database.batchableContext bc) {
         String queryString = 'SELECT Id, Contact__c, Case__c, Case__r.CustomerAccount__c, 
         Customer__c, Customer__r.Id, Campaign_Type__c, Event_Type__c, Planned_Date__c, 
-        Case_State__c FROM Collection_Event__c 
+        Case_State__c FROM Collection_Event__c //(HardshipProgram__c, Collection_Event__c)
         WHERE Status__c = \'Scheduled\' AND (Event_Type__c = \'Dialer 1 BH\'  OR 
         Event_Type__c = \'Dialer 2 AH\' OR Event_Type__c = \'Dialer 3 AH\') AND 
         Planned_Date__c <= TODAY';
