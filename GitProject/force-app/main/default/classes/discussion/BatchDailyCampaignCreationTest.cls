@@ -7,16 +7,16 @@ private class BatchDailyCampaignCreationTest  {
     @TestSetup
     static void createTestData() {
 
-        // Campaign_Job__c Data Setup
-        list<Campaign_Job__c> cJobList = new list<Campaign_Job__c>;
+        // Campaign_Jobs__c Data Setup
+        list<Campaign_Jobs__c> cJobList = new list<Campaign_Jobs__c>();
         for(Integer a = 0; a < 7; a++){
-            Campaign_Job__c newJob = new Campaign_Job__c;
+            Campaign_Jobs__c newJob = new Campaign_Jobs__c();
             cJobList.add(newJob);
           }
-        Insert cJobList;
+        insert cJobList;
 
         // purecloud__PureCloud_Campaign_Schedule__c Data Setup
-        list<string> schedName = new list<string>{'Collections - Mon - Fri - Non WA - Attempt 1', 
+        list<String> schedName = new list<String>{'Collections - Mon - Fri - Non WA - Attempt 1', 
                                                   'Collections - Mon - Fri - Non WA - Attempt 2',
                                                   'Collections - Mon - Fri - Non WA - Attempt 3',
                                                   'Collections - Mon - Fri - WA - Attempt 1',
@@ -34,70 +34,72 @@ private class BatchDailyCampaignCreationTest  {
                                                   'New Hardship Referral Campaign - WA',
                                                   'Practical Assistance Campaign - VIC',
                                                   'Review Hardship Referral Campaign - NonWA',
-                                                  'Review Hardship Referral Campaign - WA',
-                                                }
+                                                  'Review Hardship Referral Campaign - WA'
+                                                };
 
        
         list<purecloud__PureCloud_Campaign_Schedule__c> cSchedList = new list<purecloud__PureCloud_Campaign_Schedule__c>();
         for(Integer a = 0; a < 19; a++){
-            purecloud__PureCloud_Campaign_Schedule__c newSched = new purecloud__PureCloud_Campaign_Schedule__c;
+            purecloud__PureCloud_Campaign_Schedule__c newSched = new purecloud__PureCloud_Campaign_Schedule__c();
             newSched.name = schedName[a];
             newSched.purecloud__Days_of_the_Week__c = 'Monday';
             newSched.purecloud__Start_Time__c = '11:00';
             newSched.purecloud__End_Time__c = '12:00';
             cSchedList.add(newSched);
           }
-        Insert cSchedList;
+        insert cSchedList;
         
         // purecloud__PureCloud_Campaign_Setting__c Data Setup
         purecloud__PureCloud_Queue__c cQueue = new purecloud__PureCloud_Queue__c();
         cQueue.Name = 'cQueueNameTest';
-        cQueue.purecloud__PureCloud_Queue_ID__c = 1;
-        Insert cQueue;
+        cQueue.purecloud__PureCloud_Queue_ID__c = 'PureCloudQueueIDTest';
+        insert cQueue;
 
         purecloud__PureCloud_Script__c cScript = new purecloud__PureCloud_Script__c();
         cScript.Name = 'cScriptNameTest';
         cScript.purecloud__PureCloud_Name__c = 'PureCloudNameTest';
         cScript.purecloud__PureCloud_Script_ID__c = 'PureCloudScriptIDTest';
-        Insert cScript;
+        insert cScript;
 
         List<purecloud__PureCloud_Queue__c> listPureCloudQueue = [SELECT Id, Name, purecloud__PureCloud_Queue_ID__c FROM purecloud__PureCloud_Queue__c];
         purecloud__PureCloud_Queue__c queueRecord = listPureCloudQueue[0];
         List<purecloud__PureCloud_Script__c> listPureCloudScript = [SELECT Id, Name, purecloud__PureCloud_Name__c, purecloud__PureCloud_Script_ID__c FROM purecloud__PureCloud_Script__c];
         purecloud__PureCloud_Script__c scriptRecord = listPureCloudScript[0];
-        list<string> settingName = new list<string>{'Collection - Attempt 1 Sort', 
+        list<String> settingName = new list<String>{'Collection - Attempt 1 Sort', 
                                                     'Collection - Attempt 2 Sort',
                                                     'Collection - Attempt 3 Sort',
                                                     'Missed Payment Campaign Sort',
                                                     'New Hardship Referral Campaign Sort',
                                                     'Practical Assistance Campaign Sort',
                                                     'Review Hardship Referral Campaign Sort',
-                                                    'Practical Assistance Campaign Sort',                                                    
-                                                } 
+                                                    'Practical Assistance Campaign Sort'                                                    
+                                                };
 
         list<purecloud__PureCloud_Campaign_Setting__c> cSettingList = new list<purecloud__PureCloud_Campaign_Setting__c>();
+        list<Account> c = new list<Account>();
         for(Integer a = 0; a < 8; a++){
             purecloud__PureCloud_Campaign_Setting__c newSetting = new urecloud__PureCloud_Campaign_Setting__c;
             newSetting.name = schedName[a];
             newSetting.purecloud__Division__c = 'Home';
-            newSched.purecloud__Dialing_Mode__c = 'Preview Dialing';
-            newSched.purecloud__Caller_ID_Number__c = 119911;
-            newSched.purecloud__Caller_ID_Name__c = 'CallerIDNameTest';
-            newSched.purecloud__PureCloud_Script__c = scriptRecord.Id;
-            newSched.purecloud__PureCloud_Queue__c= queueRecord.Id;
+            newSetting.purecloud__Dialing_Mode__c = 'Preview Dialing';
+            newSetting.purecloud__Caller_ID_Number__c = '119911';
+            newSetting.purecloud__Caller_ID_Name__c = 'CallerIDNameTest';
+            newSetting.purecloud__PureCloud_Script__c = scriptRecord.Id;
+            newSetting.purecloud__PureCloud_Queue__c= queueRecord.Id;
             cSettingList.add(newSetting);
           }
-        Insert cSettingList;
+        insert cSettingList;
+    }
 
     // TestBody
     @isTest
-    static testMethod void batchDailyCampaignDataTest() {
+    static void batchDailyCampaignDataTest() {
         test.startTest();
         BatchDailyCampaignCreation obj = new BatchDailyCampaignCreation();
         DataBase.executeBatch(obj, 100);
         test.stopTest();
-        List<Campaign> CampaignFetch = [Select Id, Name, RecordtypeId, Event_Type__c, Campaign_Job__c, Domain__c, State__c, Type__c, StartDate, EndDate, LaunchDate__c, purecloud__PureCloud_Campaign_Schedule__c, purecloud__PureCloud_Campaign_Setting__c from Campaign ];
-        System.AssertEquals(18, CampaignFetch.size());   
+        List<Campaign> CampaignFetch = [Select Id, Name, RecordtypeId, Event_Type__c, Campaign_Job__c, Domain__c, State__c, Type, StartDate, EndDate, LaunchDate__c, purecloud__PureCloud_Campaign_Schedule__c, purecloud__PureCloud_Campaign_Setting__c from Campaign ];
+        System.AssertEquals(27, CampaignFetch.size());   
     }  
 } 
         
