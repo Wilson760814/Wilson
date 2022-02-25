@@ -270,7 +270,7 @@
                         newCampaignList.add(newCamp2);
                     }
                 }
-                if(string.valueof(dayOfWeek)!='Saturday'||string.valueof(dayOfWeek)!='Sunday'){
+                if(string.valueof(dayOfWeek) != 'Saturday' && string.valueof(dayOfWeek)!='Sunday'){
                     if(csetting.Name == 'Collection - Attempt 1 Sort'){
                         Campaign newCamp1 = new Campaign();
                         newCamp1.RecordtypeId = outboundCampRecordId;
