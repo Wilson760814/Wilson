@@ -1,25 +1,26 @@
+
+
 @isTest
-  private class BatchDailyCampaignCreationTest  {
-  // Basic RecordTypeId and date data create   
-     private static final Id recordIdTest = Schema.SObjectType.Campaign.getRecordTypeInfosByName().get('Outbound Campaign').getRecordTypeId();
-     private static final DateTime dt = Datetime.now(); 
-     private static final String dateOutput = dt.format('dd-MM-yyyy');
-     private static final String dayOfWeek=dt.format('EEEE');      
-    
-    
+private class BatchDailyCampaignCreationTest  {
+   
      // Data Setup
     @TestSetup
     static void createTestData() {
 
+<<<<<<< HEAD
         // Campaign_Jobs__c Data Setup
         list<Campaign_Jobs__c> cJobList = new list<Campaign_Jobs__c>();
         for(Integer a = 0; a < 7; a++){
             Campaign_Jobs__c newJob = new Campaign_Jobs__c();
+=======
+        // Campaign_Job__c Data Setup
+        list<Campaign_Job__c> cJobList = new list<Campaign_Job__c>();
+        for(Integer a = 0; a < 7; a++){
+            Campaign_Job__c newJob = new Campaign_Job__c();
+>>>>>>> 685b7b2ada01596fcc81692cdf6c11b9c2fffe02
             cJobList.add(newJob);
           }
         insert cJobList;
-        List<Campaign_Jobs__c> job = [SELECT Id, Name FROM Campaign_Jobs__c];
-        
 
         // purecloud__PureCloud_Campaign_Schedule__c Data Setup
         list<String> schedName = new list<String>{'Collections - Mon - Fri - Non WA - Attempt 1', 
@@ -41,7 +42,11 @@
                                                   'Practical Assistance Campaign - VIC',
                                                   'Review Hardship Referral Campaign - NonWA',
                                                   'Review Hardship Referral Campaign - WA'
+<<<<<<< HEAD
                                                 };
+=======
+                                                }
+>>>>>>> 685b7b2ada01596fcc81692cdf6c11b9c2fffe02
 
        
         list<purecloud__PureCloud_Campaign_Schedule__c> cSchedList = new list<purecloud__PureCloud_Campaign_Schedule__c>();
@@ -55,10 +60,7 @@
           }
         insert cSchedList;
         
-        
-        
-        // purecloud__PureCloud_Campaign_Setting__c Data Setup, should create 2 lookup obj data first, 
-        // the lookup objs are Script and Queue, so that can retrieve the lookup Id
+        // purecloud__PureCloud_Campaign_Setting__c Data Setup
         purecloud__PureCloud_Queue__c cQueue = new purecloud__PureCloud_Queue__c();
         cQueue.Name = 'cQueueNameTest';
         cQueue.purecloud__PureCloud_Queue_ID__c = 'PureCloudQueueIDTest';
@@ -82,102 +84,101 @@
                                                     'Practical Assistance Campaign Sort',
                                                     'Review Hardship Referral Campaign Sort',
                                                     'Practical Assistance Campaign Sort'                                                    
-                                                }; 
+                                                };
 
         list<purecloud__PureCloud_Campaign_Setting__c> cSettingList = new list<purecloud__PureCloud_Campaign_Setting__c>();
-        for(Integer a = 0; a < 7; a++){ 
-            purecloud__PureCloud_Campaign_Setting__c newSetting = new purecloud__PureCloud_Campaign_Setting__c();
-            newSetting.Name = settingName[a];
+        list<Account> c = new list<Account>();
+        for(Integer a = 0; a < 8; a++){
+            purecloud__PureCloud_Campaign_Setting__c newSetting = new urecloud__PureCloud_Campaign_Setting__c;
+            newSetting.name = schedName[a];
             newSetting.purecloud__Division__c = 'Home';
+<<<<<<< HEAD
             newSetting.purecloud__Dialing_Mode__c = 'Preview Dialing';
             newSetting.purecloud__Caller_ID_Number__c = '119911';
             newSetting.purecloud__Caller_ID_Name__c = 'CallerIDNameTest';
             newSetting.purecloud__PureCloud_Script__c = scriptRecord.Id;
             newSetting.purecloud__PureCloud_Queue__c= queueRecord.Id;
-            cSettingList.add(newSetting); 
+            cSettingList.add(newSetting);
           }
         insert cSettingList;
-                     
     }
+=======
+            newSched.purecloud__Dialing_Mode__c = 'Preview Dialing';
+            newSched.purecloud__Caller_ID_Number__c = '119911';
+            newSched.purecloud__Caller_ID_Name__c = 'CallerIDNameTest';
+            newSched.purecloud__PureCloud_Script__c = scriptRecord.Id;
+            newSched.purecloud__PureCloud_Queue__c= queueRecord.Id;
+            cSettingList.add(newSetting);
+          }
+        insert cSettingList;
+>>>>>>> 685b7b2ada01596fcc81692cdf6c11b9c2fffe02
 
-    // TestBody- Main stream Test tests the whole batch and each subclass Test tests 3 methods to gain better cover rate. 
-    //Main stream test
+    // TestBody
     @isTest
-    public static void batchDailyCampaignDataTest() { 
+    static void batchDailyCampaignDataTest() {
         test.startTest();
         BatchDailyCampaignCreation obj = new BatchDailyCampaignCreation();
         DataBase.executeBatch(obj, 100);
         test.stopTest();
         List<Campaign> CampaignFetch = [Select Id, Name, RecordtypeId, Event_Type__c, Campaign_Job__c, Domain__c, State__c, Type, StartDate, EndDate, LaunchDate__c, purecloud__PureCloud_Campaign_Schedule__c, purecloud__PureCloud_Campaign_Setting__c from Campaign ];
-        if(string.valueof(dayOfWeek) == 'Saturday'){
-            System.AssertEquals(10, CampaignFetch.size());} 
-        if((string.valueof(dayOfWeek) != 'Saturday') && (string.valueof(dayOfWeek) != 'Sunday')){
-            System.AssertEquals(17, CampaignFetch.size());} 
+        System.AssertEquals(27, CampaignFetch.size());   
     }  
-   //hardship Method test
-   @isTest
-     public static void hardshipRecordsGenerateTest() {
-        Id schedId = [SELECT Id FROM purecloud__PureCloud_Campaign_Schedule__c limit 1].Id;
-        list<String> SchedIdTest= new list<String>{schedId};
-        Id settingId = [SELECT Id FROM purecloud__PureCloud_Campaign_Setting__c limit 1].Id;
-        list<String> SettingIdTest = new list<String>{settingId};
-        Id JobId = [SELECT Id FROM Campaign_Jobs__c limit 1].Id;
-        list<String> hardshipJobId= new list<String>{JobId};        
-        list<String> hardshipName= new list<String>{'Missed Payments (Non-WA)'};  
-        list<String> hardshipState= new list<String>{'WA'};  
-        list<String> hardshipType= new list<String>{'Missed Payment'};
-        String hardshipDomain = 'Hardship'; 
-        test.startTest();
-        BatchDailyCampaignCreation obj = new BatchDailyCampaignCreation();
-         try{
-            obj.hardshipRecordsGenerate(recordIdTest, hardshipJobId, SchedIdTest, SettingIdTest, hardshipName, hardshipState, hardshipType, hardshipDomain); 
-         }catch(exception e){
-            system.debug('error'+e.getMessage());
-        }
+} 
         
-        
-        test.stopTest();        
-    } 
-    //collections WeekDay Method test
-    @isTest
-     public static void collectionsWeekDayRecordsGenerateTest() {
-        Id schedId = [SELECT Id FROM purecloud__PureCloud_Campaign_Schedule__c limit 1].Id;
-        list<String> SchedIdTest= new list<String>{schedId};
-        Id settingId = [SELECT Id FROM purecloud__PureCloud_Campaign_Setting__c limit 1].Id;
-        list<String> SettingIdTest = new list<String>{settingId};
-        list<String> collectionsWeekDayeventType= new list<String>{'Dialer 1 BH'};       
-        list<String> collectionsWeekDayName= new list<String>{'NVIC Res - Dialer 1'};  
-        list<String> collectionsWeekDayState= new list<String>{'NSW'+';'+'QLD'+';'+'SA'};  
-        list<String> collectionsWeekDayType= new list<String>{'Collections Non VIC Res'};
-        String collectionsWeekDayDomain = 'Collections';  
-        test.startTest();
-        BatchDailyCampaignCreation obj = new BatchDailyCampaignCreation();
-        try{
-          obj.collectionsWeekDayRecordsGenerate(recordIdTest, collectionsWeekDayEventType, SchedIdTest, SettingIdTest, collectionsWeekDayName, collectionsWeekDayState, collectionsWeekDayType, collectionsWeekDayDomain);             
-         }catch(exception e){
-            system.debug('error'+e.getMessage());
+/*    
+    //List<Campaign> CampaignFetch = [Select Id, Hardship_Program__c from Task where Origin__c =:'Auto-Dialler'];
+            //system.assert(!listTask.isEmpty()); 这儿写不清了：）需要每个字段都断言吗？ // 最好都加
+            Date DateCreate = Date.valueOf((System.now()-1).format('DD-MM-YYYY'));
+            List<Campaign> CampaignFetch1 = [Select Id, Name，Event_Type__c ,xxx  from Campaign where Domain__c =:'Hardship'];
+            System.AssertEquals('WNVIC Res-Dialer 1-'+DateCreate + '-MSSAT',CampaignFetch1[0].Name);
+            System.AssertEquals('Missed Payments',CampaignFetch1[0].Type);
+            //xxxx 还有其他的 下面的也是类似
+            List<Campaign> CampaignFetch2 = [Select Id, Name，Event_Type__c ,xxx  from Campaign where Domain__c =:'Collections'];
         }
-         test.stopTest();
-    } 
-    //collections Weekend Method test
-     @isTest
-     public static void collectionsWeekendRecordsGenerateTest() { 
-        Id schedId = [SELECT Id FROM purecloud__PureCloud_Campaign_Schedule__c limit 1].Id;
-        list<String> SchedIdTest= new list<String>{schedId};
-        Id settingId = [SELECT Id FROM purecloud__PureCloud_Campaign_Setting__c limit 1].Id;
-        list<String> SettingIdTest = new list<String>{settingId};
-        list<String> collectionsWeekendeventType= new list<String>{'Dialer 1 BH'};       
-        list<String> collectionsWeekendName= new list<String>{'NVIC Res - Dialer 1'};  
-        list<String> collectionsWeekendState= new list<String>{'NSW'+';'+'QLD'+';'+'SA'};  
-        list<String> collectionsWeekendType= new list<String>{'Collections Non VIC Res'};
-        String collectionsWeekendDomain = 'Collections';  
-        test.startTest();
-        BatchDailyCampaignCreation obj = new BatchDailyCampaignCreation();
-        try{
-           obj.collectionsWeekendRecordsGenerate(recordIdTest, collectionsWeekendEventType, SchedIdTest, SettingIdTest, collectionsWeekendName, collectionsWeekendState, collectionsWeekendType, collectionsWeekendDomain);             
-         }catch(exception e){
-            system.debug('error'+e.getMessage());
-        }
-         test.stopTest(); 
-    } 
+
+        Campaign_Job__c cJob = new Campaign_Job__c();
+        cJob.Name = 'CJ-0001';  //这里如果是auto number 那就不用赋值Name insert后会自动生成Name
+        cJob.xxx = 'xx';
+        //其他的必须字段
+        insert cJob；
+
+
+
+        // lookup那个object得API名 写在这创建
+        purecloud__PureCloud_Campaign_Setting__c ppcs = new purecloud__PureCloud_Campaign_Setting__c();
+        ppcs.Name = 'ppppp';
+        cJob.xxx = 'xx';
+        //其他的必须字段
+        insert ppcs;
+
+        Campaign CamTestData1 = new Campaign();  //变量名开头都是小写字母 你都用的大写 CamTestData1换成 camTestData1
+                    RecordTypeId = CAMPAIGN_RECORD_TYPE_ID； //这个要提前加上
+                    CamTestData1.Name ='WNVIC Res-Dialer 1';
+                    //CamTestData1.Event_Type__c = '';
+                    CamTestData1.Type = 'Missed Payments';
+                    CamTestData1.Domain__c = 'Hardship';
+                    CamTestData1.State__c = 'WA';
+                    CamTestData1.Campaign_Job__c = cJob.Id; // 这个不能直接赋值 需要创建这个Campaign_Job__c得object 然后把id赋值
+                     CamTestData1.purecloud__PureCloud_Campaign_Setting__c = ppcs.Id; //这里也是吧 记得是lookup得字段  也得提前创建那个objcet 然后取到id赋值
+                    CamTestData1.purecloud__PureCloud_Campaign_Schedule__c = 'Missed Payment Campaign - NonWA';  //这个如果是不同得objcet 也和上面一样 需要提前创建 在赋值Id
+
+        insert CamTestData1;
+
+        // 和上面一样的修改
+        Campaign  CamTestData2 = new Campaign()
+                    CamTestData2.CamTestData1.Name ='WWA NonDiscon-Dialer3';
+                    CamTestData2.Event_Type__c = 'Dialer 3 AH';
+                    CamTestData2.Type = 'Collections Life Support';
+                    CamTestData2.Domain__c = 'Collections';
+                    CamTestData2.State__c = 'NSW;QLD;SA';
+                    //CamTestData2.Campaign_Job__c = '';
+                    CamTestData2.purecloud__PureCloud_Campaign_Setting__c = 'Missed Payment Campaign';
+                    CamTestData2.purecloud__PureCloud_Campaign_Schedule__c = 'Collections-Mon-Fri-Non-WA-Attempt3';
+
+        insert CamTestData2;
+
+    }
+     
+   
 }
+*/

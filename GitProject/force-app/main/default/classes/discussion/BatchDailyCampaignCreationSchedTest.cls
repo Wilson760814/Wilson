@@ -1,8 +1,7 @@
 @isTest
 private class BatchDailyCampaignCreationSchedTest{
-    static testMethod void testBatchDailyCampaignCreationSched() { 
-        //时间随便写一下 未来100年后  模仿你之前参考的batch也行
-        String cronExp = '0 0 0 2 24 ? 2122';
+    static testMethod void TestBatchDailyCampaignCreationSched() { 
+        String cronExp = '0 0 10 * * ?';
         Test.startTest();
         String jobId = System.schedule('BatchDailyCampaignCreationSched', cronExp, new BatchDailyCampaignCreationSched());
         Test.stopTest();
